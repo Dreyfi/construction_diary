@@ -42,7 +42,7 @@ abstract class _HomeStoreBase with Store {
   Future<bool> createDiaryEntry(DiaryEntry entry) async {
     setLoading(true);
     await _homeDatasource.createDiaryEntry(entry);
-    setLoading(true);
+    setLoading(false);
     return true;
   }
 }

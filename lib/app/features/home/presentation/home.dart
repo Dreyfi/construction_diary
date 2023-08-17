@@ -290,11 +290,6 @@ class _HomeState extends State<Home> {
                           TheButtonWidget(
                             label: ResourcesStrings.next(),
                             onPressed: () async {
-                              widget.homeStore.setLoading(true);
-                              Future.delayed(const Duration(seconds: 2), () {
-                                widget.homeStore.setLoading(false);
-                              });
-
                               final map = _selectedImages
                                   .map((e) => {'hash': e['hash']})
                                   .toList();
