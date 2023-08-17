@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:construction_diary/app/core/resources/resources_strings.dart';
@@ -25,8 +24,16 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final TextEditingController _tagsController = TextEditingController();
   final TextEditingController _commentsController = TextEditingController();
+  final TextEditingController _dateController =
+      TextEditingController(text: '2020-06-29');
+  final TextEditingController _areaController =
+      TextEditingController(text: 'Select Area');
+  final TextEditingController _taskController =
+      TextEditingController(text: 'Task Category');
+  final TextEditingController _tagsController = TextEditingController();
+  final TextEditingController _eventController =
+      TextEditingController(text: 'Select an event');
 
   final List<Map<String, dynamic>> _selectedImages = [];
 
@@ -191,45 +198,64 @@ class _HomeState extends State<Home> {
                                       ?.copyWith(fontWeight: FontWeight.w900),
                                 ),
                                 const Divider(),
+                                // TODO: Add showDatePicker
                                 DropdownButton<String>(
                                     isExpanded: true,
                                     style: theme.textTheme.bodyMedium,
-                                    value: '2020-06-29',
-                                    items: ['2020-06-29']
+                                    value: _dateController.text,
+                                    items: ['2020-06-29', '2020-07-01']
                                         .map<DropdownMenuItem<String>>(
                                             (String value) => DropdownMenuItem(
                                                 value: value,
                                                 child: Text(value)))
                                         .toList(),
-                                    onChanged: (value) {}),
+                                    onChanged: (value) {
+                                      if (value != null) {
+                                        setState(() {
+                                          _dateController.text = value;
+                                        });
+                                      }
+                                    }),
                                 const SizedBox(
                                   height: 8,
                                 ),
                                 DropdownButton<String>(
                                     isExpanded: true,
                                     style: theme.textTheme.bodyMedium,
-                                    value: ResourcesStrings.selectArea(),
+                                    value: _areaController.text,
                                     items: ['Select Area', 'Test2']
                                         .map<DropdownMenuItem<String>>(
                                             (String value) => DropdownMenuItem(
                                                 value: value,
                                                 child: Text(value)))
                                         .toList(),
-                                    onChanged: (value) {}),
+                                    onChanged: (value) {
+                                      if (value != null) {
+                                        setState(() {
+                                          _areaController.text = value;
+                                        });
+                                      }
+                                    }),
                                 const SizedBox(
                                   height: 8,
                                 ),
                                 DropdownButton<String>(
                                     isExpanded: true,
                                     style: theme.textTheme.bodyMedium,
-                                    value: ResourcesStrings.taskCategory(),
+                                    value: _taskController.text,
                                     items: ['Task Category', 'Test']
                                         .map<DropdownMenuItem<String>>(
                                             (String value) => DropdownMenuItem(
                                                 value: value,
                                                 child: Text(value)))
                                         .toList(),
-                                    onChanged: (value) {}),
+                                    onChanged: (value) {
+                                      if (value != null) {
+                                        setState(() {
+                                          _taskController.text = value;
+                                        });
+                                      }
+                                    }),
                                 const SizedBox(
                                   height: 8,
                                 ),
@@ -273,14 +299,18 @@ class _HomeState extends State<Home> {
                                 DropdownButton<String>(
                                     isExpanded: true,
                                     style: theme.textTheme.bodyMedium,
-                                    value: ResourcesStrings.selectAnEvent(),
+                                    value: _eventController.text,
                                     items: ['Select an event', 'Test4']
                                         .map<DropdownMenuItem<String>>(
                                             (String value) => DropdownMenuItem(
                                                 value: value,
                                                 child: Text(value)))
                                         .toList(),
-                                    onChanged: (value) {}),
+                                    onChanged: (value) {
+                                      if (value != null) {
+                                        _eventController.text = value;
+                                      }
+                                    }),
                               ],
                             ),
                           ),
@@ -299,13 +329,15 @@ class _HomeState extends State<Home> {
                               await widget.homeStore.createDiaryEntry(
                                   DiaryEntry(
                                       images: base64List,
-                                      includeGallery: true,
-                                      comments: 'comments',
-                                      date: 'date',
-                                      area: 'area',
-                                      tags: 'tags',
-                                      linkToExistingEvent: true,
-                                      event: 'event',
+                                      includeGallery:
+                                          widget.homeStore.includeGallery,
+                                      comments: _commentsController.text,
+                                      date: _dateController.text,
+                                      area: _areaController.text,
+                                      tags: _tagsController.text,
+                                      linkToExistingEvent:
+                                          widget.homeStore.linkToExistingEvent,
+                                      event: _eventController.text,
                                       email: 'eve.holt@reqres.in',
                                       password: 'pistol'));
                             },

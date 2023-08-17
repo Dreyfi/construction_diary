@@ -12,12 +12,12 @@ class HomeDataSourceImpl implements HomeDataSource {
   Future<bool> createDiaryEntry(DiaryEntry entry) async {
     final uno = Uno();
 
-    final Map<String, String> _headers = {};
-    _headers["Content-Type"] = "application/json";
-    _headers["Accept"] = "application/json";
+    final Map<String, String> headers = {};
+    headers["Content-Type"] = "application/json";
+    headers["Accept"] = "application/json";
 
     await uno.post('${ResourcesConstants.apiUlr}posts',
-        data: DiaryEntryMapper.toJson(entry), headers: _headers);
+        data: DiaryEntryMapper.toJson(entry), headers: headers);
     return true;
   }
 }
