@@ -1,4 +1,3 @@
-import 'package:construction_diary/app/core/resources/resources_strings.dart';
 import 'package:construction_diary/app/core/themes/construction_diary_light.dart';
 import 'package:flutter/material.dart';
 
