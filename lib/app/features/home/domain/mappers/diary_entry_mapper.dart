@@ -3,7 +3,7 @@ import 'package:construction_diary/app/features/home/domain/entities/diary_entry
 class DiaryEntryMapper {
   static DiaryEntry fromJson(Map<String, dynamic> json) {
     return DiaryEntry(
-      image: json['image'],
+      images: json['image'],
       includeGallery: json['includeGallery'],
       comments: json['comments'],
       date: json['date'],
@@ -18,7 +18,7 @@ class DiaryEntryMapper {
 
   static Map<String, dynamic> toJson(DiaryEntry diaryEntry) {
     return {
-      'image': diaryEntry.image,
+      'images': diaryEntry.images,
       'includeGallery': diaryEntry.includeGallery,
       'comments': diaryEntry.comments,
       'date': diaryEntry.date,

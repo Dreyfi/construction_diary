@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class DiaryEntry {
-  String image;
+  String images;
   bool includeGallery;
   String comments;
   String date;
@@ -11,7 +11,7 @@ class DiaryEntry {
   String email;
   String password;
   DiaryEntry({
-    required this.image,
+    required this.images,
     required this.includeGallery,
     required this.comments,
     required this.date,

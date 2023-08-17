@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:construction_diary/app/core/resources/resources_strings.dart';
@@ -26,14 +28,17 @@ class _HomeState extends State<Home> {
   final TextEditingController _tagsController = TextEditingController();
   final TextEditingController _commentsController = TextEditingController();
 
-  final List<File> _selectedImages = [];
+  final List<Map<String, dynamic>> _selectedImages = [];
 
   Future<void> _pickImage() async {
     final ImagePicker picker = ImagePicker();
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
     if (image?.path != null) {
+      final bytes = await image?.readAsBytes();
+      final String? base64 = bytes != null ? base64Encode(bytes) : null;
+
       setState(() {
-        _selectedImages.add(File(image!.path));
+        _selectedImages.add({'file': File(image!.path), 'hash': base64});
       });
     }
   }
@@ -95,7 +100,8 @@ class _HomeState extends State<Home> {
                                                 child: Stack(
                                                   children: [
                                                     Image.file(
-                                                      _selectedImages[index],
+                                                      _selectedImages[index]
+                                                          ['file'],
                                                       height: 60,
                                                       width: 60,
                                                       fit: BoxFit.cover,
@@ -288,9 +294,16 @@ class _HomeState extends State<Home> {
                               Future.delayed(const Duration(seconds: 2), () {
                                 widget.homeStore.setLoading(false);
                               });
+
+                              final map = _selectedImages
+                                  .map((e) => {'hash': e['hash']})
+                                  .toList();
+                              final list = json.encode(map);
+                              final base64List = base64Encode(list.codeUnits);
+
                               await widget.homeStore.createDiaryEntry(
                                   DiaryEntry(
-                                      image: 'image',
+                                      images: base64List,
                                       includeGallery: true,
                                       comments: 'comments',
                                       date: 'date',
