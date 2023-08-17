@@ -25,6 +25,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.4.2"
+  asuka:
+    dependency: "direct main"
+    description:
+      name: asuka
+      sha256: "2cdff43305cbbe31faecbf275931e3a8f8e2ef91f8ffc2b961a3bbaafff5d959"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.0"
   async:
     dependency: transitive
     description:
@@ -205,10 +213,10 @@ packages:
     dependency: transitive
     description:
       name: file
-      sha256: "5fc22d7c25582e38ad9a8515372cd9a93834027aacf1801cf01164dac0ffa08c"
+      sha256: "1b92bec4fc2a72f59a8e15af5f52cd441e4a7860b49499d69dfa817af20e925d"
       url: "https://pub.dev"
     source: hosted
-    version: "7.0.0"
+    version: "6.1.4"
   file_selector_linux:
     dependency: transitive
     description:
@@ -488,6 +496,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
+  mime_type:
+    dependency: transitive
+    description:
+      name: mime_type
+      sha256: "2ad6e67d3d2de9ac0f8ef5352d998fd103cb21351ae8c02fb0c78b079b37d275"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   mobx:
     dependency: "direct main"
     description:
@@ -709,6 +725,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.2"
+  universal_io:
+    dependency: transitive
+    description:
+      name: universal_io
+      sha256: "1722b2dcc462b4b2f3ee7d188dad008b6eb4c40bbd03a3de451d82c78bba9aad"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.2"
+  uno:
+    dependency: "direct main"
+    description:
+      name: uno
+      sha256: dd00f8f51907139132addef07b97b5a2b0d19788f116995ec86dca64e57eae8e
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.9"
   vector_math:
     dependency: transitive
     description:

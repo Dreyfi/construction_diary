@@ -1,3 +1,4 @@
+import 'package:construction_diary/app/features/home/data/datasources/home_datasource.dart';
 import 'package:construction_diary/app/features/home/presentation/home.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +14,6 @@ class AppWidget extends StatefulWidget {
 class _AppWidgetState extends State<AppWidget> {
   @override
   Widget build(BuildContext context) {
-    return Home(homeStore: HomeStore());
+    return Home(homeStore: HomeStore(HomeDataSourceImpl()));
   }
 }
