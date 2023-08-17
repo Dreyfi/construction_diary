@@ -16,7 +16,7 @@ class HomeDataSourceImpl implements HomeDataSource {
     _headers["Content-Type"] = "application/json";
     _headers["Accept"] = "application/json";
 
-    await uno.post('https://reqres.in/api/register',
+    await uno.post('${ResourcesConstants.apiUlr}posts',
         data: DiaryEntryMapper.toJson(entry), headers: _headers);
     return true;
   }
