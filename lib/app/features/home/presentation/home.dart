@@ -8,6 +8,7 @@ import 'package:construction_diary/app/features/home/presentation/widgets/the_lo
 import 'package:construction_diary/app/widgets/molecules/the_button_widget.dart';
 import 'package:construction_diary/app/widgets/molecules/the_card_widget.dart';
 import 'package:construction_diary/app/widgets/molecules/the_field_widget.dart';
+import 'package:construction_diary/app/widgets/molecules/the_loading_widget.dart';
 import 'package:construction_diary/app/widgets/organisms/the_app_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -58,7 +59,7 @@ class _HomeState extends State<Home> {
       body: SingleChildScrollView(
         child: Observer(builder: (context) {
           return widget.homeStore.isLoading
-              ? const Center(child: CircularProgressIndicator())
+              ? const TheLoadingWidget()
               : Column(
                   children: [
                     const TheLocationHeaderWidget(),
@@ -142,8 +143,11 @@ class _HomeState extends State<Home> {
                                     ),
                                     const Spacer(),
                                     Checkbox(
-                                      value: true,
-                                      onChanged: (value) {},
+                                      value: widget.homeStore.includeGallery,
+                                      onChanged: (value) {
+                                        widget.homeStore
+                                            .setIncludeGallery(value ?? false);
+                                      },
                                     )
                                   ],
                                 )
@@ -249,7 +253,14 @@ class _HomeState extends State<Home> {
                                           ?.copyWith(
                                               fontWeight: FontWeight.w900),
                                     ),
-                                    Checkbox(value: true, onChanged: (value) {})
+                                    Checkbox(
+                                        value: widget
+                                            .homeStore.linkToExistingEvent,
+                                        onChanged: (value) {
+                                          widget.homeStore
+                                              .setLinkToExistingEvent(
+                                                  value ?? false);
+                                        })
                                   ],
                                 ),
                                 const Divider(),
@@ -272,18 +283,23 @@ class _HomeState extends State<Home> {
                           ),
                           TheButtonWidget(
                             label: ResourcesStrings.next(),
-                            onPressed: () {
-                              widget.homeStore.createDiaryEntry(DiaryEntry(
-                                  image: 'image',
-                                  includeGallery: true,
-                                  comments: 'comments',
-                                  date: 'date',
-                                  area: 'area',
-                                  tags: 'tags',
-                                  linkToExistingEvent: true,
-                                  event: 'event',
-                                  email: 'eve.holt@reqres.in',
-                                  password: 'pistol'));
+                            onPressed: () async {
+                              widget.homeStore.setLoading(true);
+                              Future.delayed(const Duration(seconds: 2), () {
+                                widget.homeStore.setLoading(false);
+                              });
+                              await widget.homeStore.createDiaryEntry(
+                                  DiaryEntry(
+                                      image: 'image',
+                                      includeGallery: true,
+                                      comments: 'comments',
+                                      date: 'date',
+                                      area: 'area',
+                                      tags: 'tags',
+                                      linkToExistingEvent: true,
+                                      event: 'event',
+                                      email: 'eve.holt@reqres.in',
+                                      password: 'pistol'));
                             },
                           ),
                           const SizedBox(
