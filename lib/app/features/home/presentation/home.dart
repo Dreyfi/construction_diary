@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:asuka/snackbars/asuka_snack_bar.dart';
 import 'package:construction_diary/app/core/resources/resources_strings.dart';
 import 'package:construction_diary/app/core/themes/construction_diary_light.dart';
 import 'package:construction_diary/app/features/home/domain/entities/diary_entry.dart';
@@ -326,8 +327,8 @@ class _HomeState extends State<Home> {
                               final list = json.encode(map);
                               final base64List = base64Encode(list.codeUnits);
 
-                              await widget.homeStore.createDiaryEntry(
-                                  DiaryEntry(
+                              final response = await widget.homeStore
+                                  .createDiaryEntry(DiaryEntry(
                                       images: base64List,
                                       includeGallery:
                                           widget.homeStore.includeGallery,
@@ -340,6 +341,12 @@ class _HomeState extends State<Home> {
                                       event: _eventController.text,
                                       email: 'eve.holt@reqres.in',
                                       password: 'pistol'));
+
+                              if (response) {
+                                AsukaSnackbar.success(
+                                        "Information sent, thank you!")
+                                    .show();
+                              }
                             },
                           ),
                           const SizedBox(

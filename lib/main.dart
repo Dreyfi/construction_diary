@@ -1,3 +1,4 @@
+import 'package:asuka/asuka.dart';
 import 'package:construction_diary/app/core/themes/construction_diary_light.dart';
 import 'package:flutter/material.dart';
 
@@ -16,6 +17,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Construction Diary App',
       theme: ConstructionDiaryLight.buildTheme(context),
+      builder: Asuka.builder,
+      navigatorObservers: [Asuka.asukaHeroController],
       home: const AppWidget(),
     );
   }
