@@ -1,6 +1,8 @@
 import 'package:construction_diary/app/features/home/presentation/home.dart';
 import 'package:flutter/material.dart';
 
+import 'features/home/presentation/home_store.dart';
+
 class AppWidget extends StatefulWidget {
   const AppWidget({super.key});
 
@@ -11,6 +13,6 @@ class AppWidget extends StatefulWidget {
 class _AppWidgetState extends State<AppWidget> {
   @override
   Widget build(BuildContext context) {
-    return const Home();
+    return Home(homeStore: HomeStore());
   }
 }

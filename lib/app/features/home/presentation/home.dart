@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:construction_diary/app/core/resources/resources_strings.dart';
 import 'package:construction_diary/app/core/themes/construction_diary_light.dart';
+import 'package:construction_diary/app/features/home/presentation/home_store.dart';
 import 'package:construction_diary/app/features/home/presentation/widgets/the_location_header_widget.dart';
 import 'package:construction_diary/app/widgets/molecules/the_button_widget.dart';
 import 'package:construction_diary/app/widgets/molecules/the_card_widget.dart';
@@ -11,7 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class Home extends StatefulWidget {
-  const Home({super.key});
+  final HomeStore homeStore;
+  const Home({super.key, required this.homeStore});
 
   @override
   State<Home> createState() => _HomeState();
