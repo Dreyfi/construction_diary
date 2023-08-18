@@ -6,7 +6,7 @@ class ConstructionDiaryLight {
   static const secondaryColor = Color(0xFF09101D);
   static const textColor = Color.fromARGB(174, 0, 0, 0);
   static const textColorLight = Color.fromARGB(148, 24, 24, 24);
-  static const borderColorLight = Color(0xFFDADEE3);
+  static const borderColorLight = Color.fromARGB(32, 24, 24, 24);
   static const textColorDefault = Color(0xFF09101D);
   static const bodyColor = Color(0xFFffffff);
   static const canvasColor = Color(0xFFF1F5F7);
@@ -97,11 +97,11 @@ class ConstructionDiaryLight {
   );
 
   static const enabledInputBorder = UnderlineInputBorder(
-    borderSide: BorderSide(color: textColorLight),
+    borderSide: BorderSide(color: borderColorLight),
   );
 
   static const defaultInputBorder = UnderlineInputBorder(
-    borderSide: BorderSide(color: textColorLight),
+    borderSide: BorderSide(color: borderColorLight),
   );
 
   static ThemeData buildTheme(BuildContext context) {

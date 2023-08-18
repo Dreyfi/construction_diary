@@ -13,6 +13,7 @@ import 'package:construction_diary/app/widgets/molecules/the_card_widget.dart';
 import 'package:construction_diary/app/widgets/molecules/the_field_widget.dart';
 import 'package:construction_diary/app/widgets/molecules/the_loading_widget.dart';
 import 'package:construction_diary/app/widgets/organisms/the_app_bar_widget.dart';
+import 'package:construction_diary/app/widgets/organisms/the_date_picker_widget.dart';
 import 'package:construction_diary/app/widgets/organisms/the_gallery_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -164,24 +165,19 @@ class _HomeState extends State<Home> {
                                       ?.copyWith(fontWeight: FontWeight.w900),
                                 ),
                                 const Divider(),
-                                // TODO: Add showDatePicker
-                                DropdownButton<String>(
-                                    isExpanded: true,
-                                    style: theme.textTheme.bodyMedium,
-                                    value: _dateController.text,
-                                    items: ['2020-06-29', '2020-07-01']
-                                        .map<DropdownMenuItem<String>>(
-                                            (String value) => DropdownMenuItem(
-                                                value: value,
-                                                child: Text(value)))
-                                        .toList(),
-                                    onChanged: (value) {
-                                      if (value != null) {
-                                        setState(() {
-                                          _dateController.text = value;
-                                        });
-                                      }
-                                    }),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                TheDatePickerWidget(
+                                  value: _dateController.text,
+                                  onDateChange: (value) {
+                                    if (value != null) {
+                                      setState(() {
+                                        _dateController.text = value;
+                                      });
+                                    }
+                                  },
+                                ),
                                 const SizedBox(
                                   height: 8,
                                 ),
@@ -222,9 +218,6 @@ class _HomeState extends State<Home> {
                                         });
                                       }
                                     }),
-                                const SizedBox(
-                                  height: 8,
-                                ),
                                 TheFieldWidget(
                                   hint: ResourcesStrings.tags(),
                                   controller: _tagsController,
