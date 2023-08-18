@@ -44,10 +44,17 @@ abstract class _HomeStoreBase with Store {
 
   @action
   Future<bool> createDiaryEntry(DiaryEntry entry) async {
-    setLoading(true);
-    await _homeDatasource.createDiaryEntry(entry);
-    setLoading(false);
-    return true;
+    try {
+      setLoading(true);
+      await _homeDatasource.createDiaryEntry(entry);
+      setLoading(false);
+      return true;
+    } catch (e) {
+      // In a real app, use a logging package and send info to Crashlytics
+      return false;
+    } finally {
+      setLoading(false);
+    }
   }
 
   @action
