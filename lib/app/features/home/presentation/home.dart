@@ -6,6 +6,7 @@ import 'package:construction_diary/app/core/resources/resources_strings.dart';
 import 'package:construction_diary/app/core/themes/construction_diary_light.dart';
 import 'package:construction_diary/app/features/home/domain/entities/diary_entry.dart';
 import 'package:construction_diary/app/features/home/presentation/home_store.dart';
+import 'package:construction_diary/app/features/home/presentation/widgets/the_gallery_checkbox_widget.dart';
 import 'package:construction_diary/app/features/home/presentation/widgets/the_location_header_widget.dart';
 import 'package:construction_diary/app/widgets/molecules/the_button_widget.dart';
 import 'package:construction_diary/app/widgets/molecules/the_card_widget.dart';
@@ -122,25 +123,13 @@ class _HomeState extends State<Home> {
                                     onRemoveImagePressed: (int index) =>
                                         _removeImage(index),
                                     onPickImagePressed: _pickImage),
-                                Row(
-                                  children: [
-                                    Text(
-                                      ResourcesStrings.includeInPhotoGallery(),
-                                      style: theme.textTheme.bodySmall
-                                          ?.copyWith(
-                                              color: ConstructionDiaryLight
-                                                  .textColorLight),
-                                    ),
-                                    const Spacer(),
-                                    Checkbox(
-                                      value: widget.homeStore.includeGallery,
-                                      onChanged: (value) {
-                                        widget.homeStore
-                                            .setIncludeGallery(value ?? false);
-                                      },
-                                    )
-                                  ],
-                                )
+                                TheGalleryCheckboxWidget(
+                                    initialValue:
+                                        widget.homeStore.includeGallery,
+                                    onChange: (value) {
+                                      widget.homeStore
+                                          .setIncludeGallery(value ?? false);
+                                    })
                               ],
                             ),
                           ),
