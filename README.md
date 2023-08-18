@@ -51,6 +51,7 @@ dart run build_runner watch --delete-conflicting-outputs
 * Form validations
 * [Integration tests](https://docs.flutter.dev/cookbook/testing/integration/introduction). Write tests that runs the app and perform user flow simulation
 * For multiple pages app I would use the [flutter_modular](https://pub.dev/packages/flutter_modular) package, then take advantage of your dependency injection system
+* [Crashlytics](https://firebase.google.com/products/crashlytics) then know everything that goes wrong in prod
 
 ## Thanks
 
