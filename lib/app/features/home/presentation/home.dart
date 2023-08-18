@@ -58,6 +58,28 @@ class _HomeState extends State<Home> {
   }
 
   @override
+  void dispose() {
+    _commentsController.dispose();
+    _dateController.dispose();
+    _areaController.dispose();
+    _taskController.dispose();
+    _tagsController.dispose();
+    _eventController.dispose();
+    widget.homeStore.dispose();
+    super.dispose();
+  }
+
+  void _clearFields() {
+    _commentsController.text = '';
+    _dateController.text = '2020-06-29';
+    _areaController.text = 'Select Area';
+    _taskController.text = 'Task Category';
+    _tagsController.text = '';
+    _eventController.text = 'Select an event';
+    widget.homeStore.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
@@ -263,7 +285,9 @@ class _HomeState extends State<Home> {
                                         .toList(),
                                     onChanged: (value) {
                                       if (value != null) {
-                                        _eventController.text = value;
+                                        setState(() {
+                                          _eventController.text = value;
+                                        });
                                       }
                                     }),
                               ],
@@ -300,6 +324,8 @@ class _HomeState extends State<Home> {
                                 AsukaSnackbar.success(
                                         "Information sent, thank you!")
                                     .show();
+
+                                _clearFields();
                               }
                             },
                           ),

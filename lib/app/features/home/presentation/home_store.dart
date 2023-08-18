@@ -49,4 +49,9 @@ abstract class _HomeStoreBase with Store {
     setLoading(false);
     return true;
   }
+
+  @action
+  void dispose() {
+    selectedImages = ObservableList.of([]);
+  }
 }

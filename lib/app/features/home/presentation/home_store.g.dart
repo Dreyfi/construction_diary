@@ -142,6 +142,17 @@ mixin _$HomeStore on _HomeStoreBase, Store {
   }
 
   @override
+  void dispose() {
+    final _$actionInfo = _$_HomeStoreBaseActionController.startAction(
+        name: '_HomeStoreBase.dispose');
+    try {
+      return super.dispose();
+    } finally {
+      _$_HomeStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 selectedImages: ${selectedImages},
