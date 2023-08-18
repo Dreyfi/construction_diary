@@ -1,10 +1,13 @@
 # Martin Pulgar Construction App
 
-![](header1.jpg){width=120}
 
-Martin Pulgar Construction is a fictitious construction company. They have approached their IT department to create a new mobile app for their ground staff to upload photos.
+<img src="header1.jpg" alt="header1" width="900"/>
+<br /><br />
+Martin Pulgar Construction is a fictitious construction company. They have approached their IT department <br />to create a new mobile app for their ground staff to upload photos.
+<br /><br />
 
-![](header.gif){width=120}
+<img src="header.gif" alt="header" width="400"/>
+
 
 ### Installing
 
