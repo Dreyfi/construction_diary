@@ -281,15 +281,10 @@ class _HomeState extends State<Home> {
                           TheButtonWidget(
                             label: ResourcesStrings.next(),
                             onPressed: () async {
-                              final map = widget.homeStore.selectedImages
-                                  .map((e) => {'hash': e['hash']})
-                                  .toList();
-                              final list = json.encode(map);
-                              final base64List = base64Encode(list.codeUnits);
-
                               final response = await widget.homeStore
                                   .createDiaryEntry(DiaryEntry(
-                                      images: base64List,
+                                      images: _getImageListHash(
+                                          widget.homeStore.selectedImages),
                                       includeGallery:
                                           widget.homeStore.includeGallery,
                                       comments: _commentsController.text,
@@ -322,5 +317,11 @@ class _HomeState extends State<Home> {
         }),
       ),
     );
+  }
+
+  String _getImageListHash(List images) {
+    final map = images.map((e) => {'hash': e['hash']}).toList();
+    final list = json.encode(map);
+    return base64Encode(list.codeUnits);
   }
 }
