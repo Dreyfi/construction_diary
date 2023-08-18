@@ -46,6 +46,12 @@ dart run build_runner watch --delete-conflicting-outputs
 
 * **Dry F.** - *Initial work* - [Linkedin](https://www.linkedin.com/in/dreyfiferreira) - [Website](https://dreyfi.com)
 
+## What would I do in a real app?
+* [Remote config](https://firebase.google.com/docs/remote-config) then remove all hardcoded params
+* Form validations
+* [Integration tests](https://docs.flutter.dev/cookbook/testing/integration/introduction). Write tests that runs the app and perform user flow simulation
+* For multiple pages app I would use the [flutter_modular](https://pub.dev/packages/flutter_modular) package, then take advantage of your dependency injection system
+
 ## Thanks
 
 * All coffee makers in Australia
