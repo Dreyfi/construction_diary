@@ -12,6 +12,7 @@ import 'package:construction_diary/app/widgets/molecules/the_card_widget.dart';
 import 'package:construction_diary/app/widgets/molecules/the_field_widget.dart';
 import 'package:construction_diary/app/widgets/molecules/the_loading_widget.dart';
 import 'package:construction_diary/app/widgets/organisms/the_app_bar_widget.dart';
+import 'package:construction_diary/app/widgets/organisms/the_gallery_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:image_picker/image_picker.dart';
@@ -36,8 +37,6 @@ class _HomeState extends State<Home> {
   final TextEditingController _eventController =
       TextEditingController(text: 'Select an event');
 
-  final List<Map<String, dynamic>> _selectedImages = [];
-
   Future<void> _pickImage() async {
     final ImagePicker picker = ImagePicker();
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
@@ -46,14 +45,15 @@ class _HomeState extends State<Home> {
       final String? base64 = bytes != null ? base64Encode(bytes) : null;
 
       setState(() {
-        _selectedImages.add({'file': File(image!.path), 'hash': base64});
+        widget.homeStore.selectedImages
+            .add({'file': File(image!.path), 'hash': base64});
       });
     }
   }
 
   void _removeImage(int index) {
     setState(() {
-      _selectedImages.removeAt(index);
+      widget.homeStore.selectedImages.removeAt(index);
     });
   }
 
@@ -94,58 +94,12 @@ class _HomeState extends State<Home> {
                               children: [
                                 Text(ResourcesStrings.addPhotosToSiteDiary()),
                                 const Divider(),
-                                Column(
-                                  children: [
-                                    SizedBox(
-                                        height: 80,
-                                        child: ListView.builder(
-                                            scrollDirection: Axis.horizontal,
-                                            itemCount: _selectedImages.length,
-                                            itemBuilder: (context, index) {
-                                              return Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8),
-                                                child: Stack(
-                                                  children: [
-                                                    Image.file(
-                                                      _selectedImages[index]
-                                                          ['file'],
-                                                      height: 60,
-                                                      width: 60,
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                                    Positioned(
-                                                        top: 0,
-                                                        right: 0,
-                                                        child: GestureDetector(
-                                                            onTap: () =>
-                                                                _removeImage(
-                                                                    index),
-                                                            child: Container(
-                                                              decoration: BoxDecoration(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              8),
-                                                                  color: ConstructionDiaryLight
-                                                                      .neutralBlack),
-                                                              child: const Icon(
-                                                                Icons.close,
-                                                                size: 16,
-                                                                color: ConstructionDiaryLight
-                                                                    .bodyColor,
-                                                              ),
-                                                            )))
-                                                  ],
-                                                ),
-                                              );
-                                            }))
-                                  ],
-                                ),
-                                TheButtonWidget(
-                                  label: ResourcesStrings.addAphoto(),
-                                  onPressed: () => _pickImage(),
-                                ),
+                                TheGalleryWidget(
+                                    selectedImages:
+                                        widget.homeStore.selectedImages,
+                                    onRemoveImagePressed: (int index) =>
+                                        _removeImage(index),
+                                    onPickImagePressed: _pickImage),
                                 Row(
                                   children: [
                                     Text(
@@ -321,7 +275,7 @@ class _HomeState extends State<Home> {
                           TheButtonWidget(
                             label: ResourcesStrings.next(),
                             onPressed: () async {
-                              final map = _selectedImages
+                              final map = widget.homeStore.selectedImages
                                   .map((e) => {'hash': e['hash']})
                                   .toList();
                               final list = json.encode(map);

@@ -39,6 +39,9 @@ abstract class _HomeStoreBase with Store {
 
   _HomeStoreBase(this._homeDatasource);
 
+  @observable
+  ObservableList<Map<String, dynamic>> selectedImages = ObservableList.of([]);
+
   @action
   Future<bool> createDiaryEntry(DiaryEntry entry) async {
     setLoading(true);

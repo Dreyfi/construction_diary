@@ -80,6 +80,22 @@ mixin _$HomeStore on _HomeStoreBase, Store {
     });
   }
 
+  late final _$selectedImagesAtom =
+      Atom(name: '_HomeStoreBase.selectedImages', context: context);
+
+  @override
+  ObservableList<Map<String, dynamic>> get selectedImages {
+    _$selectedImagesAtom.reportRead();
+    return super.selectedImages;
+  }
+
+  @override
+  set selectedImages(ObservableList<Map<String, dynamic>> value) {
+    _$selectedImagesAtom.reportWrite(value, super.selectedImages, () {
+      super.selectedImages = value;
+    });
+  }
+
   late final _$createDiaryEntryAsyncAction =
       AsyncAction('_HomeStoreBase.createDiaryEntry', context: context);
 
@@ -128,6 +144,7 @@ mixin _$HomeStore on _HomeStoreBase, Store {
   @override
   String toString() {
     return '''
+selectedImages: ${selectedImages},
 linkToExistingEvent: ${linkToExistingEvent},
 includeGallery: ${includeGallery},
 isLoading: ${isLoading}
