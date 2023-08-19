@@ -6,7 +6,7 @@
 Martin Pulgar Construction is a fictitious construction company. They have approached their IT department <br />to create a new mobile app for their ground staff to upload photos.
 <br /><br />
 
-<img src="header.gif" alt="header" width="400"/>
+<img src="header.gif" alt="header" width="300"/>
 
 
 ### Installing
